@@ -1,0 +1,65 @@
+#include<bits/stdc++.h>
+using namespace std;
+bool checkBalanced(char c1,char c2)
+{
+     return (c1=='('&&c2==')')||(c1=='{'&&c2=='}')||(c1=='['&&c2==']') ;
+}
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    int n;
+    cin>>n;
+    while(n--)
+    {
+        string s;
+        cin>>s;
+        int check = 1;
+        stack<char>st;
+        for(auto it : s)
+        {
+            if(it=='('||it=='{'||it=='[')
+                {
+                    st.push(it);
+                }
+
+            else
+                {
+                    if(st.empty())
+                    {
+                        check = 0;
+                    }
+                    else
+                    {
+                        bool t = checkBalanced(st.top(),it);
+                        if(t)
+                        {
+                            st.pop();
+                        }
+                        else
+                        {
+                            check = 0;
+                            break ;
+                        }
+                    }
+                }
+        }
+        if(!st.empty())
+        {
+            check = 0;
+        }
+
+        if(check)
+        {
+            cout<<"YES"<<endl;
+        }
+        else
+        {
+            cout<<"NO"<<endl;
+        }
+
+
+    }
+    return 0;
+}
